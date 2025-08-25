@@ -240,10 +240,16 @@ NEXT_PUBLIC_API_BASE=http://localhost:4000
 ### Backend Environment Variables
 ```env
 PORT=4000
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/badsha_bangles
-JWT_SECRET=your_jwt_secret_key
+MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<database_name>
+JWT_SECRET=<your_secure_jwt_secret_key>
 NODE_ENV=development
 ```
+
+**⚠️ Security Notice:**
+- Never commit actual credentials to version control
+- Use environment variables or secure secret management
+- Copy `.env.example` to `.env` and configure with your actual values
+- Ensure `.env` is listed in `.gitignore`
 
 ## 📞 API Endpoints
 
@@ -268,12 +274,50 @@ NODE_ENV=development
 
 ## 🔒 Security Features
 
+### Authentication & Authorization
 - JWT-based authentication with secure token handling
 - Input validation and sanitization on all endpoints
 - CORS configuration for cross-origin requests
 - Rate limiting to prevent API abuse
 - Secure password hashing with bcrypt
 - Environment variable protection for sensitive data
+
+### Security Best Practices Implemented
+- **No Hardcoded Credentials:** All sensitive data stored in environment variables
+- **Secure Headers:** Helmet.js for security headers
+- **Input Validation:** Comprehensive validation on all user inputs
+- **Rate Limiting:** Protection against brute force attacks
+- **HTTPS Ready:** SSL/TLS configuration for production
+- **Database Security:** MongoDB connection with authentication
+
+### 🚨 Security Configuration Guide
+
+#### 1. Environment Variables Setup
+```bash
+# Copy environment template
+cp backend/.env.example backend/.env
+
+# Edit with your actual values (NEVER commit .env files)
+nano backend/.env
+```
+
+#### 2. Secure Credential Management
+- **Never commit credentials to version control**
+- **Use strong, unique passwords for all services**
+- **Rotate credentials regularly**
+- **Use environment-specific credentials**
+- **Enable MongoDB Atlas IP whitelist**
+- **Use secure JWT secret (minimum 32 characters)**
+
+#### 3. Production Security Checklist
+- [ ] All environment variables configured
+- [ ] Database credentials rotated
+- [ ] HTTPS/SSL certificates installed
+- [ ] CORS origins restricted to production domains
+- [ ] Rate limiting configured appropriately
+- [ ] Security headers enabled
+- [ ] Input validation implemented
+- [ ] Logging and monitoring configured
 
 ## 📈 Performance Metrics
 
